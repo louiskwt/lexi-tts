@@ -1,4 +1,5 @@
 import gtts, csv, os
+from utils import find_duplicate
 
 def get_word_from_csv(filename, target_column="word"):
     words = []
@@ -17,4 +18,6 @@ def generate_audio(words):
             tts.save(f'output/{word}.mp3')
 
 words = get_word_from_csv('phrase.csv', "phrase")
+
 generate_audio(words)
+find_duplicate(words)
