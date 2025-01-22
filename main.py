@@ -1,7 +1,7 @@
 import gtts, csv, os
 from utils import find_duplicate
 
-def get_word_from_csv(filename, target_column="word"):
+def get_word_from_csv(filename: str, target_column: str ="word") -> list[str]:
     words = []
     with open(filename, mode='r') as f:
         csvFile = csv.DictReader(f)
@@ -9,7 +9,7 @@ def get_word_from_csv(filename, target_column="word"):
             words.append(row[target_column])
     return words
 
-def generate_audio(words):
+def generate_audio(words: list[str]) -> None:
     if not os.path.exists('output'):
         os.makedirs("output")
     else:
@@ -17,7 +17,7 @@ def generate_audio(words):
             tts = gtts.gTTS(f'{word}', slow=True)
             tts.save(f'output/{word}.mp3')
 
-words = get_word_from_csv('phrase.csv', "phrase")
+words = get_word_from_csv('words.csv', "word")
 
 generate_audio(words)
 find_duplicate(words)
