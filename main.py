@@ -17,14 +17,15 @@ def generate_audio(words: list[str]) -> None:
             tts = gtts.gTTS(f'{word}', slow=True)
             tts.save(f'output/{word}.mp3')
 
-parser = argparse.ArgumentParser(prog="Lexi-tts", description="The text to speech tool for generating sound of the words. It's mainly used for the lexi project to create sound for a language learning game, but can also be used for other purposes", epilog="It's open source and in active development. So feel free to contribute")
-parser.add_argument('file_name', type=str, help='The program requires a file name to run. The file should be located in the same directory.')
-parser.add_argument('target_column', type=str, nargs="?", default="word", help="The program requires a target column to extract words from the csv. The default is set to 'word'")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(prog="Lexi-tts", description="The text to speech tool for generating sound of the words. It's mainly used for the lexi project to create sound for a language learning game, but can also be used for other purposes", epilog="It's open source and in active development. So feel free to contribute")
+    parser.add_argument('file_name', type=str, help='The program requires a file name to run. The file should be located in the same directory.')
+    parser.add_argument('target_column', type=str, nargs="?", default="word", help="The program requires a target column to extract words from the csv. The default is set to 'word'")
 
-args = parser.parse_args()
-file_name = args.file_name
-target_column = args.target_column
+    args = parser.parse_args()
+    file_name = args.file_name
+    target_column = args.target_column
 
-words = get_word_from_csv(file_name, target_column)
-generate_audio(words)
-find_duplicate(words)
+    words = get_word_from_csv(file_name, target_column)
+    generate_audio(words)
+    find_duplicate(words)
